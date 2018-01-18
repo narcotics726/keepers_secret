@@ -1,9 +1,13 @@
 <template>
   <div>
     Hello, {{message}}!
+    <div>
     <ChaInput></ChaInput>
+    <ChaInput></ChaInput>
+
+    </div>
   </div>
-  
+
 </template>
 
 <script>

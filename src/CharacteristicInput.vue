@@ -1,53 +1,84 @@
 <template>
   <div class="characteristicInput">
+      <div class="percentage"></div>
       <label for="">
           {{ chaName }}
       </label>
-      <input type="text" class="chaVal">
-      <input type="text" class="chaVal-half">
-      <input type="text" class="chaVal-fifth">
+      <input type="text" class="chaVal" v-model="chaVal">
+      <input type="text" class="chaVal-half" v-model="chaValHalf">
+      <input type="text" class="chaVal-fifth" v-model="chaValFifth">
   </div>
 </template>
 
 <script>
 export default {
-    data() {
+    data () {
         return {
-            chaName: '属性名'
+            chaName: '属性名',
+            chaVal: 0
+        }
+    },
+    computed: {
+        chaValHalf () {
+            return Math.floor(this.chaVal / 2);
+        },
+        chaValFifth () {
+            return Math.floor(this.chaVal / 5);
         }
     }
 }
 </script>
 <style scoped>
+
 .characteristicInput {
     display: inline-block;
-    background-color: grey;
-    width: 200px;
+    width: 180px;
     height: 50px;
+    position: relative;
+}
+
+.percentage {
+    position: absolute;
+    display: inline-block;
+    border: 1px solid transparent;
+    width: 25%;
+    height: 45%;
+    left: 0;
+    bottom: 0;
+    background-color: forestgreen;
+    z-index: -1;
 }
 
 .characteristicInput label {
-    display: inline-block;
-    width: 50px;
+    width: 25%;
+    line-height: 50px;
+    text-align: center;
+    float: left;
+}
+
+.characteristicInput input {
+    width: 35%;
     height: 50px;
+    display: inline-block;
+    text-align: center;
+    border: none;
 }
 
 .characteristicInput input.chaVal {
-    width: 75px;
-    height: 50px;
-    display: inline-block;
+    width: 40%;
+    float: left;
+    border-right: 1px solid;
 }
 
 .characteristicInput input.chaVal-half {
-    width: 75px;
     height: 25px;
-    display: inline-block;
+    float: right;
+    border-bottom: 1px solid;
 }
 
 .characteristicInput input.chaVal-fifth {
-    width: 75px;
     height: 25px;
-    display: inline-block;
+    float: right;
 }
 </style>
 
