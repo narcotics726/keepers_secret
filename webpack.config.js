@@ -18,6 +18,17 @@ module.exports = {
                 options: {
                     loaders: {}
                 }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/, 
+                loader: "file-loader"
             }
         ]
     },

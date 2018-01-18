@@ -12,10 +12,14 @@
 
 <script>
 export default {
-    data () {
-        return {
-            chaName: '属性名',
-            chaVal: 0
+    props: {
+        chaName: {
+            type: String,
+            default: "Characteristic"
+        },
+        chaVal: {
+            type: Number,
+            default: 0
         }
     },
     computed: {
@@ -32,21 +36,21 @@ export default {
 
 .characteristicInput {
     display: inline-block;
-    width: 180px;
-    height: 50px;
+    width: 100%;
+    height: 52px;
     position: relative;
+    border: 1px solid green;
 }
 
 .percentage {
     position: absolute;
     display: inline-block;
-    border: 1px solid transparent;
+    border: none;
     width: 25%;
-    height: 45%;
+    height: 100%;
     left: 0;
-    bottom: 0;
-    background-color: forestgreen;
-    z-index: -1;
+    bottom: -1px;
+    background-color: rgba(34, 139, 34, 0.445);
 }
 
 .characteristicInput label {
@@ -62,6 +66,7 @@ export default {
     display: inline-block;
     text-align: center;
     border: none;
+    padding: 0;
 }
 
 .characteristicInput input.chaVal {
