@@ -2,9 +2,9 @@
   <div class="characteristicInput">
       <div class="percentage"></div>
       <label for="">
-          {{ chaName }}
+          {{ cName }}
       </label>
-      <input type="text" class="chaVal" v-model="chaVal">
+      <input type="text" class="chaVal" v-model="cVal">
       <input type="text" class="chaVal-half" v-model="chaValHalf">
       <input type="text" class="chaVal-fifth" v-model="chaValFifth">
   </div>
@@ -20,14 +20,24 @@ export default {
         chaVal: {
             type: Number,
             default: 0
+        },
+        formula: {
+            type: String,
+            default: ''
+        }
+    },
+    data () {
+        return {
+            cName: this.chaName,
+            cVal: this.chaVal
         }
     },
     computed: {
         chaValHalf () {
-            return Math.floor(this.chaVal / 2);
+            return Math.floor(this.cVal / 2);
         },
         chaValFifth () {
-            return Math.floor(this.chaVal / 5);
+            return Math.floor(this.cVal / 5);
         }
     }
 }

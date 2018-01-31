@@ -4,7 +4,7 @@
       <!-- 
         
        -->
-       header
+       Keeper's Secret
     </div>
     <div class="left testbox">
       <!-- 
@@ -17,6 +17,7 @@
         investigator sheet here.
       -->
       main
+      <ChaInput chaName="力量"></ChaInput>
     </div>
     <div class="footer testbox">
 footer
