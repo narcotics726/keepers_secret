@@ -19,6 +19,12 @@ const OPERATOR_LIST = [
             return result;
         },
         priority: -1
+    },
+    {
+        char: '(', priority: Number.POSITIVE_INFINITY
+    },
+    {
+        char: ')', priority: Number.POSITIVE_INFINITY
     }
 ];
 
@@ -48,6 +54,23 @@ const shuntingYard = function (infixExpr) {
                 continue;
             }
 
+            if (opDef.char === '(') {
+                opStack.push('(');
+                continue;
+            }
+
+            if (opDef.char === ')') {
+                for (let j = opStack.length - 1; j >= 0; j --) {
+                    const x = opStack.pop();
+                    if (x !== '(') {
+                        output.push(x);
+                    } else {
+                        continue;
+                    }
+                }
+                continue;
+            }
+
             for (let j = opStack.length - 1; j >= 0; j--) {
                 const peekOp = opStack.pop();
                 if (opDef.priority < getOperatorDef(peekOp).priority) {
@@ -69,7 +92,7 @@ const shuntingYard = function (infixExpr) {
     if (nextNumber !== '') {
         output.push(nextNumber);
     }
-    output = output.concat(opStack.reverse());
+    output = output.concat(opStack.reverse().filter(x => ['(', ')'].indexOf(x) === -1));
 
     return output;
 };
