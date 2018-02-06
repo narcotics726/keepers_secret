@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const rnd = function (max) {
-    return Math.floor(Math.random() * (max - 1) + 1);
+    return Math.floor(Math.random() * max + 1);
 };
 
 const OPERATOR_LIST = [
@@ -97,6 +97,38 @@ const shuntingYard = function (infixExpr) {
     return output;
 };
 
+const evaluateRPNExpr = function (rpnExprArr) {
+    const valStack = [];
+    for (let i = 0; i < rpnExprArr.length; i ++) {
+        const char = rpnExprArr[i];
+        const opDef = getOperatorDef(char);
+        if (opDef !== undefined && _.isFunction(opDef.handler)) {
+            const y = valStack.pop();
+            const x = valStack.pop();
+            const r = opDef.handler(x, y);
+            valStack.push(r);
+        } else {
+            const num = Number(char);
+            if (!_.isNumber(num)) {
+                throw new Error(`${char} is neither a Number nor an Operator.`);
+            }
+
+            valStack.push(num);
+        }
+    }
+
+    if (valStack.length === 1) {
+        return valStack[0];
+    } else {
+        throw new Error(`there are reduncant numbers in the expression.`);
+    }
+};
+
+const evaluate = function (infixExpr) {
+    return evaluateRPNExpr(shuntingYard(infixExpr));
+};
+
 export {
-    shuntingYard
+    shuntingYard,
+    evaluate
 };
