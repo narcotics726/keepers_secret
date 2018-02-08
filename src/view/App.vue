@@ -17,7 +17,7 @@
         investigator sheet here.
       -->
       main
-      <ChaInput chaName="力量"></ChaInput>
+      <Characteristics />
     </div>
     <div class="footer testbox">
 footer
@@ -26,14 +26,14 @@ footer
 </template>
 
 <script>
-import ChaInput from "./CharacteristicInput.vue";
+import Characteristics from "./Characteristics.vue";
 
 export default {
   data() {
     return { message: "Investigators" };
   },
   components: {
-    ChaInput
+    Characteristics
   }
 };
 </script>
