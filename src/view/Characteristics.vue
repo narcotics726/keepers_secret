@@ -4,7 +4,7 @@
           {{sectionTitle}}
       </div>
       <div class="section-body">
-          <ChaInput 
+          <ChaInput class="cha-input"
             v-for="cha in getChaList" 
             :key="cha.name" 
             :chaName="cha.name" 
@@ -43,3 +43,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.section-body .cha-input {
+  width: 255px;
+  margin: 5px 10px;
+}
+</style>
