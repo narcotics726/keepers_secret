@@ -6,9 +6,8 @@
       <div class="section-body">
           <ChaInput class="cha-input"
             v-for="cha in getChaList" 
-            :key="cha.name" 
-            :chaName="cha.name" 
-            :formula="cha.formula"
+            :key="cha.key"
+            v-bind="cha"
             />
       </div>
   </div>
@@ -26,14 +25,15 @@ export default {
   data() {
     return {
       getChaList: [
-        { name: '力量 STR', formula: '3D6*5' },
-        { name: '敏捷 DEX', formula: '2D6*5' },
-        { name: '意志 POW', formula: '3D6*5' },
-        { name: '体质 CON', formula: '3D6*5' },
-        { name: '外貌 APP', formula: '3D6*5' },
-        { name: '教育 EDU', formula: '(2D6+6)*5' },
-        { name: '体型 SIZ', formula: '(2D6+6)*5' },
-        { name: '智力 INT', formula: '(2D6+6)*5' }
+        { key: 'STR', name: '力量 STR', formula: '3D6*5' },
+        { key: 'DEX', name: '敏捷 DEX', formula: '2D6*5' },
+        { key: 'POW', name: '意志 POW', formula: '3D6*5' },
+        { key: 'CON', name: '体质 CON', formula: '3D6*5' },
+        { key: 'APP', name: '外貌 APP', formula: '3D6*5' },
+        { key: 'EDU', name: '教育 EDU', formula: '(2D6+6)*5' },
+        { key: 'SIZ', name: '体型 SIZ', formula: '(2D6+6)*5' },
+        { key: 'INT', name: '智力 INT', formula: '(2D6+6)*5' },
+        { key: 'LUC', name: '幸运 LUC', formula: '3D6*5' },
       ],
       sectionTitle: 'Characteristics'
     };

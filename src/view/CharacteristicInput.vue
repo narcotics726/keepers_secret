@@ -15,11 +15,11 @@
 import { evaluate } from "../lib/dice_eval";
 export default {
   props: {
-    chaName: {
+    name: {
       type: String,
       default: "Characteristic"
     },
-    chaVal: {
+    val: {
       type: Number,
       default: 0
     },
@@ -30,8 +30,8 @@ export default {
   },
   data() {
     return {
-      cName: this.chaName,
-      cVal: this.chaVal
+      cName: this.name,
+      cVal: this.val
     };
   },
   computed: {
