@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <div class="header testbox">
-      <!-- 
-        
+      <!--
+
        -->
-       Keeper's Secret
+      Keeper's Secret
     </div>
     <div class="left testbox">
-      <!-- 
+      <!--
         nav menu here
        -->
-       left
+      left
     </div>
     <div class="main testbox">
       <!--
@@ -20,21 +20,21 @@
       <Characteristics />
     </div>
     <div class="footer testbox">
-footer
+      footer
     </div>
   </div>
 </template>
 
 <script>
-import Characteristics from "./Characteristics.vue";
+import Characteristics from './Characteristics.vue';
 
 export default {
-  data() {
-    return { message: "Investigators" };
-  },
-  components: {
-    Characteristics
-  }
+    data() {
+        return { message: 'Investigators' };
+    },
+    components: {
+        Characteristics
+    }
 };
 </script>
 
@@ -50,9 +50,9 @@ body {
 
 <style scoped>
 .container {
-    display: grid;
+  display: grid;
 }
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   .container {
     grid-template-columns: 80px 2fr;
   }

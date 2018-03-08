@@ -1,3 +1,5 @@
+/* global test, expect */
+
 import { shuntingYard, evaluate } from '../../src/lib/dice_eval';
 
 test('evaluate "1D6"', () => {
@@ -56,7 +58,7 @@ test('the chance of a "1D6" result should be near to 1/6 for each result', () =>
     }
 
     chance = chance.map(x => Math.abs(x / 100000 - 1/6));
-    
+
     chance.forEach(x => {
         expect(x).toBeCloseTo(0);
     });
