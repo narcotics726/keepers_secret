@@ -120,7 +120,7 @@ const evaluateRPNExpr = function (rpnExprArr) {
     if (valStack.length === 1) {
         return valStack[0];
     } else {
-        throw new Error(`there are reduncant numbers in the expression.`);
+        throw new Error('there are reduncant numbers in the expression.');
     }
 };
 

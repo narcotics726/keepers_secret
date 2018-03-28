@@ -8,8 +8,13 @@ test('create a new sheet', () => {
 
 test('the chaList should not be modified', () => {
     let chaList = CharacterSheet.getChaList();
-    chaList.push({ key: 'modified_key' });
+    chaList['modified_key'] = {};
     expect(new CharacterSheet()).not.toHaveProperty(['characteristics', 'modified_key']);
     chaList = [{key: 'modified_key'}];
     expect(new CharacterSheet()).not.toHaveProperty(['characteristics', 'modified_key']);
+});
+
+test('toString', () => {
+    const c = new CharacterSheet();
+    console.log(c.toString());
 });
