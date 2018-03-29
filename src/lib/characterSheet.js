@@ -20,7 +20,7 @@ export default class CharacterSheet {
     constructor() {
         this.characteristics = {};
         _.forIn(COC_CHARACTERISTICS, x => {
-            this.characteristics[x.key] = evaluate(x.formula);
+            this.characteristics[x.key] = { expr_result: evaluate(x.formula) };
         });
 
         this.age = -1;
@@ -33,55 +33,51 @@ export default class CharacterSheet {
         }
 
         if (between(this.age, 15, 19)) {
-            this.bonus.push({ cha: ['str', 'siz'], bonus: -5 });
-            this.bonus.push({ cha: 'edu', bonus: -5 });
-            this.bonus.push({ cha: 'luc', bonus: '-1D' });
+            this.bonus.push({ cha: ['str', 'siz'], expr: -5 });
+            this.bonus.push({ cha: 'edu', expr: -5 });
+            this.bonus.push({ cha: 'luc', expr: '-1D' });
             return;
         }
 
         if (between(this.age, 20, 39)) {
-            this.bonus.push({ cha: 'edu', bonus: '1D' });
+            this.bonus.push({ cha: 'edu', expr: '1D' });
             return;
         }
 
         if (between(this.age, 40, 49)) {
-            this.bonus.push({ cha: 'edu', bonus: '2D' });
-            this.bonus.push({ cha: ['str', 'con', 'dex'], bonus: -5 });
-            this.bonus.push({ cha: 'app', bonus: -5 });
+            this.bonus.push({ cha: 'edu', expr: '2D' });
+            this.bonus.push({ cha: ['str', 'con', 'dex'], expr: -5 });
+            this.bonus.push({ cha: 'app', expr: -5 });
             return;
         }
 
         if (between(this.age, 50, 59)) {
-            this.bonus.push({cha: 'edu', bonus: '3D'});
-            this.bonus.push({ cha: ['str', 'con', 'dex'], bonus: -10 });
-            this.bonus.push({ cha: 'app', bonus: -10 });
+            this.bonus.push({ cha: 'edu', expr: '3D' });
+            this.bonus.push({ cha: ['str', 'con', 'dex'], expr: -10 });
+            this.bonus.push({ cha: 'app', expr: -10 });
             return;
         }
 
         if (between(this.age, 60, 69)) {
-            this.bonus.push({ cha: 'edu', bonus: '4D' });
-            this.bonus.push({ cha: ['str', 'con', 'dex'], bonus: -20 });
-            this.bonus.push({ cha: 'app', bonus: -15 });
+            this.bonus.push({ cha: 'edu', expr: '4D' });
+            this.bonus.push({ cha: ['str', 'con', 'dex'], expr: -20 });
+            this.bonus.push({ cha: 'app', expr: -15 });
             return;
         }
 
         if (between(this.age, 70, 79)) {
-            this.bonus.push({ cha: 'edu', bonus: '4D' });
-            this.bonus.push({ cha: ['str', 'con', 'dex'], bonus: -40 });
-            this.bonus.push({ cha: 'app', bonus: -20 });
+            this.bonus.push({ cha: 'edu', expr: '4D' });
+            this.bonus.push({ cha: ['str', 'con', 'dex'], expr: -40 });
+            this.bonus.push({ cha: 'app', expr: -20 });
             return;
         }
 
         if (between(this.age, 80, 89)) {
-            this.bonus.push({ cha: 'edu', bonus: '4D' });
-            this.bonus.push({ cha: ['str', 'con', 'dex'], bonus: -80 });
-            this.bonus.push({ cha: 'app', bonus: -25 });
+            this.bonus.push({ cha: 'edu', expr: '4D' });
+            this.bonus.push({ cha: ['str', 'con', 'dex'], expr: -80 });
+            this.bonus.push({ cha: 'app', expr: -25 });
             return;
         }
-    }
-
-    calculateBonus(bonus) {
-
     }
 
     static getChaList() {

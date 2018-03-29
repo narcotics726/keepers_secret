@@ -12,10 +12,11 @@ const OPERATOR_LIST = [
     {
         char: 'D',
         handler: (x, y) => {
-            let result = 0;
+            let result = { dices: [], value: 0 };
             for (let i = 0; i < x; i++) {
-                result += rnd(y);
+                result.dices.push(rnd(y));
             }
+            result.value = result.dices.reduce((x, y) => x + y);
             return result;
         },
         priority: -1
@@ -60,7 +61,7 @@ const shuntingYard = function (infixExpr) {
             }
 
             if (opDef.char === ')') {
-                for (let j = opStack.length - 1; j >= 0; j --) {
+                for (let j = opStack.length - 1; j >= 0; j--) {
                     const x = opStack.pop();
                     if (x !== '(') {
                         output.push(x);
@@ -99,14 +100,20 @@ const shuntingYard = function (infixExpr) {
 
 const evaluateRPNExpr = function (rpnExprArr) {
     const valStack = [];
-    for (let i = 0; i < rpnExprArr.length; i ++) {
+    const dices = [];
+    for (let i = 0; i < rpnExprArr.length; i++) {
         const char = rpnExprArr[i];
         const opDef = getOperatorDef(char);
         if (opDef !== undefined && _.isFunction(opDef.handler)) {
             const y = valStack.pop();
+            let yVal = typeof y === 'number' ? y : y.value;
             const x = valStack.pop();
-            const r = opDef.handler(x, y);
+            let xVal = typeof x === 'number' ? x : x.value;
+            const r = opDef.handler(xVal, yVal);
             valStack.push(r);
+            if (typeof r === 'object') {
+                dices.push({ string: `${x}D${y}=${r.dices.toString()}`, dices: r.dices });
+            }
         } else {
             const num = Number(char);
             if (!_.isNumber(num)) {
@@ -118,7 +125,7 @@ const evaluateRPNExpr = function (rpnExprArr) {
     }
 
     if (valStack.length === 1) {
-        return valStack[0];
+        return { value: typeof valStack[0] === 'number' ? valStack[0] : valStack[0].value, dices: dices };
     } else {
         throw new Error('there are reduncant numbers in the expression.');
     }

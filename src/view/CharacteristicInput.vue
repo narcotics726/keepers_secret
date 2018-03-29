@@ -1,56 +1,74 @@
 <template>
   <div class="characteristicInput" >
-      <div class="dice-btn" v-on:click="dice" ></div>
-      <div class="percentage" :style="percentage"></div>
-      <label for="" >
-          {{ cName }}
-      </label>
-      <input type="text" class="chaVal" v-model="cVal">
-      <input type="text" class="chaVal-half" v-model="chaValHalf">
-      <input type="text" class="chaVal-fifth" v-model="chaValFifth">
+    <div
+      class="dice-btn"
+      @click="dice"
+    />
+    <div
+      class="percentage"
+      :style="percentage"
+    />
+    <label for="" >
+      {{ cName }}
+    </label>
+    <input
+      type="text"
+      class="chaVal"
+      v-model="cVal"
+    >
+    <input
+      type="text"
+      class="chaVal-half"
+      v-model="chaValHalf"
+    >
+    <input
+      type="text"
+      class="chaVal-fifth"
+      v-model="chaValFifth"
+    >
   </div>
 </template>
 
 <script>
-import { evaluate } from "../lib/dice_eval";
+import { evaluate } from '../lib/dice_eval';
 export default {
-  props: {
-    name: {
-      type: String,
-      default: "Characteristic"
+    props: {
+        name: {
+            type: String,
+            default: 'Characteristic'
+        },
+        val: {
+            type: Number,
+            default: 0
+        },
+        formula: {
+            type: String,
+            default: ''
+        }
     },
-    val: {
-      type: Number,
-      default: 0
+    data() {
+        return {
+            cName: this.name,
+            cVal: this.val
+        };
     },
-    formula: {
-      type: String,
-      default: ""
+    computed: {
+        chaValHalf() {
+            return Math.floor(this.cVal / 2);
+        },
+        chaValFifth() {
+            return Math.floor(this.cVal / 5);
+        },
+        percentage() {
+            return `height: ${this.cVal}%;`;
+        }
+    },
+    methods: {
+        dice: function() {
+            const res = evaluate(this.formula);
+            this.cVal = res.value;
+        }
     }
-  },
-  data() {
-    return {
-      cName: this.name,
-      cVal: this.val
-    };
-  },
-  computed: {
-    chaValHalf() {
-      return Math.floor(this.cVal / 2);
-    },
-    chaValFifth() {
-      return Math.floor(this.cVal / 5);
-    },
-    percentage() {
-      return `height: ${this.cVal}%;`;
-    }
-  },
-  methods: {
-    dice: function() {
-      const res = evaluate(this.formula);
-      this.cVal = res;
-    }
-  }
 };
 </script>
 <style scoped>
